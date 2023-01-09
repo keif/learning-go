@@ -2,18 +2,20 @@ package main
 
 import (
 	"fmt"
-	"time"
 )
 
 func main() {
 
-	n := time.Now()
-	fmt.Println("I recorded this video at ", n)
+	anInt := 42
+	var p = &anInt
+	fmt.Println("Pointers")
+	fmt.Println("Value of p:", *p)
 
-	t := time.Date(2009, time.November, 10, 23, 0, 0, 0, time.UTC)
-	fmt.Println("Go launched at ", t)
-	fmt.Println(t.Format(time.ANSIC))
+	value1 := 42.13
+	pointer1 := &value1
+	fmt.Println("Value 1:", *pointer1)
 
-	parsedTime, _ := time.Parse(time.ANSIC, "Tue Nov 10 23:00:00 2009")
-	fmt.Printf("The type of parsedTime is %T\n", parsedTime)
+	*pointer1 = *pointer1 / 31
+	fmt.Println("Pointer 1:", *pointer1)
+	fmt.Println("Value 1:", value1)
 }
