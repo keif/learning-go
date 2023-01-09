@@ -2,22 +2,18 @@ package main
 
 import (
 	"fmt"
-	"math"
+	"time"
 )
 
 func main() {
-	i1, i2, i3 := 12, 45, 68
-	intSum := i1 + i2 + i3
-	fmt.Println("Integers sum:", intSum)
 
-	f1, f2, f3 := 23.5, 65.1, 76.3
-	floatSum := f1 + f2 + f3
-	fmt.Println("Float sum:", floatSum)
+	n := time.Now()
+	fmt.Println("I recorded this video at ", n)
 
-	floatSum = math.Round(floatSum*100) / 100
-	fmt.Println("The sum is now:", floatSum)
+	t := time.Date(2009, time.November, 10, 23, 0, 0, 0, time.UTC)
+	fmt.Println("Go launched at ", t)
+	fmt.Println(t.Format(time.ANSIC))
 
-	circleRadius := 15.5
-	circumference := circleRadius * 2 * math.Pi
-	fmt.Printf("Circumference: %.2f\n", circumference)
+	parsedTime, _ := time.Parse(time.ANSIC, "Tue Nov 10 23:00:00 2009")
+	fmt.Printf("The type of parsedTime is %T\n", parsedTime)
 }
