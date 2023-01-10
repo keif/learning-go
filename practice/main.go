@@ -6,28 +6,37 @@ import (
 )
 
 func main() {
-	fmt.Println("Slices")
+	fmt.Println("Maps")
 
-	var colors = []string{"Red", "Green", "Blue"}
-	fmt.Println(colors)
-	colors = append(colors, "Purple")
-	fmt.Println(colors)
+	states := make(map[string]string)
+	fmt.Println(states)
+	states["WA"] = "Washington"
+	states["OR"] = "Oregon"
+	states["CA"] = "California"
+	fmt.Println(states)
 
-	colors = append(colors[:len(colors)-1])
-	fmt.Println(colors)
+	california := states["CA"]
+	fmt.Println(california)
 
-	numbers := make([]int, 5, 5)
-	numbers[0] = 134
-	numbers[1] = 234
-	numbers[2] = 543
-	numbers[3] = 12
-	numbers[4] = 69
-	fmt.Println(numbers)
+	delete(states, "OR")
+	states["NY"] = "New York"
+	fmt.Println(states)
 
-	numbers = append(numbers, 235)
-	fmt.Println(numbers)
+	for k, v := range states {
+		fmt.Printf("%v: %v\n", k, v)
+	}
 
-	sort.Ints(numbers)
-	fmt.Println(numbers)
+	keys := make([]string, len(states))
+	i := 0
+	for k := range states {
+		keys[i] = k
+		i++
+	}
+	fmt.Println(keys)
+	sort.Strings(keys)
+	fmt.Println(keys)
 
+	for i := range keys {
+		fmt.Println(states[keys[i]])
+	}
 }
