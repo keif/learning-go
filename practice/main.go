@@ -2,44 +2,42 @@ package main
 
 import (
 	"fmt"
-	"math/rand"
-	"time"
 )
 
 func main() {
 
-	fmt.Println("Evaluate expressions with switch statements")
+	fmt.Println("Create loops with for statements")
+	colors := []string{"Red", "Green", "Blue"}
+	fmt.Println(colors)
 
-	rand.Seed(time.Now().Unix())
-	dow := rand.Intn(7) + 1
-	fmt.Println("Day", dow)
-
-	var result string
-	switch dow {
-	case 1:
-		result = "It's Sunday"
-		// fallthrough
-	case 2:
-		result = "It's Monday"
-		// fallthrough
-	case 3:
-		result = "It's Tuesday"
-		// fallthrough
-	case 4:
-		result = "It's Wednesday"
-		// fallthrough
-	case 5:
-		result = "It's Thursday"
-		// fallthrough
-	case 6:
-		result = "It's Friday"
-		// fallthrough
-	case 7:
-		result = "It's Saturday"
-		// fallthrough
-	default:
-		result = "It's some other day!"
+	for i := 0; i < len(colors); i++ {
+		fmt.Println(colors[i])
 	}
-	fmt.Println(result)
+
+	for i := range colors {
+		fmt.Println(colors[i])
+	}
+
+	for _, color := range colors {
+		fmt.Println(color)
+	}
+
+	value := 1
+	for value < 10 {
+		fmt.Println("Value:", value)
+		value++
+	}
+
+	sum := 1
+	for sum < 1000 {
+		sum += sum
+		fmt.Println("Sum:", sum)
+		if sum > 200 {
+			goto theEnd
+		}
+	}
+
+theEnd:
+	fmt.Println("End of program")
 
 }
