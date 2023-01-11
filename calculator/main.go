@@ -3,35 +3,92 @@ package main
 import (
 	"bufio"
 	"fmt"
-	"math"
 	"os"
 	"strconv"
 	"strings"
 )
 
+var reader = bufio.NewReader(os.Stdin)
+
 func main() {
-	errorStr := "Entry must be a number"
+	var result float64
 
-	reader := bufio.NewReader(os.Stdin)
+	value1 := getInput("first")
+	value2 := getInput("second")
+	operation := getOperation()
 
-	fmt.Print("Enter your first number: ")
-	input1, _ := reader.ReadString('\n')
-	float1, err := strconv.ParseFloat(strings.TrimSpace(input1), 64)
+	switch operation {
+	case "+":
+		result = addValues(value1, value2)
+	case "-":
+		result = subtractValues(value1, value2)
+	case "*":
+		result = multiplyValues(value1, value2)
+	case "/":
+		result = divideValues(value1, value2)
+	default:
+		panic("Invalid operation")
+	}
+	fmt.Printf("The result of of %v %v %v is %v\n", value1, operation, value2, result)
+
+}
+
+func getInput(prompt string) float64 {
+	fmt.Printf("Enter your %v number: ", prompt)
+	input, _ := reader.ReadString('\n')
+	float, err := strconv.ParseFloat(strings.TrimSpace(input), 64)
 	if err != nil {
 		fmt.Println(err)
-		panic(errorStr)
+		panic("Entry must be a number")
 	}
 
-	fmt.Print("Enter your second number: ")
-	input2, _ := reader.ReadString('\n')
-	float2, err := strconv.ParseFloat(strings.TrimSpace(input2), 64)
-	if err != nil {
-		fmt.Println(err)
-		panic(errorStr)
+	return float
+}
+
+func getOperation() string {
+	fmt.Print("Select an operation (+ - * /): ")
+	op, _ := reader.ReadString('\n')
+	return strings.TrimSpace(op)
+}
+
+func addValues(values ...float64) float64 {
+	var total float64 = 0
+
+	for _, v := range values {
+		total += v
 	}
+	return total
+}
 
-	sum := float1 + float2
-	sum = math.Round(sum*100) / 100
-	fmt.Printf("The sum of %v and %v is %v\n", float1, float2, sum)
+func subtractValues(values ...float64) float64 {
+	var total float64 = values[0]
 
+	for i, v := range values {
+		if i != 0 {
+			total -= v
+		}
+	}
+	return total
+}
+
+func multiplyValues(values ...float64) float64 {
+	var total float64 = values[0]
+
+	for i, v := range values {
+		if i != 0 {
+			total *= v
+		}
+	}
+	return total
+}
+
+func divideValues(values ...float64) float64 {
+	var total float64 = values[0]
+
+	for i, v := range values {
+		if i != 0 {
+			total /= v
+		}
+	}
+	return total
 }
