@@ -5,18 +5,27 @@ import (
 )
 
 func main() {
-	fmt.Println("Structs")
 
-	poodle := Dog{"Poodle", 10}
-	fmt.Println(poodle)
-	fmt.Printf("%+v\n", poodle)
-	fmt.Printf("Breed: %v\nWeight: %v\n", poodle.Breed, poodle.Weight)
-	poodle.Weight = 9
-	fmt.Printf("Breed: %v\nWeight: %v\n", poodle.Breed, poodle.Weight)
-}
+	fmt.Println("Program conditional logic")
 
-// Dog is a struct
-type Dog struct {
-	Breed  string
-	Weight int
+	theAnswer := 42
+	var result string
+	if theAnswer < 0 {
+		result = "Less than zero"
+	} else if theAnswer == 0 {
+		result = "Equal to zero"
+	} else {
+		result = "Greater than zero"
+	}
+	fmt.Println(result)
+
+	if x := -42; x < 0 {
+		result = "Less than zero"
+	} else if x == 0 {
+		result = "Equal to zero"
+	} else {
+		result = "Greater than zero"
+	}
+	fmt.Println(result)
+
 }
