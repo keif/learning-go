@@ -2,39 +2,37 @@ package main
 
 import (
 	"fmt"
+	"io"
+	"io/ioutil"
+	"os"
 )
 
 func main() {
 
-	fmt.Println("Define functions as methods of custom types")
+	fmt.Println("Files")
 
-	poodle := Dog{"Poodle", 10, "Woof!"}
-	fmt.Println(poodle)
-	fmt.Printf("%+v\n", poodle)
-	fmt.Printf("Breed: %v\nWeight: %v\n", poodle.Breed, poodle.Weight)
-	poodle.Speak()
+	content := "Hello from Go!"
+	fileName := "./fromString.txt"
 
-	poodle.Sound = "Arf!"
-	poodle.Speak()
-	poodle.SpeakThreeTimes()
-	poodle.SpeakThreeTimes()
+	file, err := os.Create(fileName)
+	checkError(err)
 
+	length, err := io.WriteString(file, content)
+	checkError(err)
+
+	fmt.Printf("Wrote a file with %v characters\n", length)
+	defer file.Close() // always close files
+	defer readFile(fileName)
 }
 
-// Dog is a struct
-type Dog struct {
-	Breed  string
-	Weight int
-	Sound  string
+func readFile(fileName string) {
+	data, err := ioutil.ReadFile(fileName)
+	checkError(err)
+	fmt.Println("Text read from file:", string(data))
 }
 
-// Speak is how the dog speaks
-func (d Dog) Speak() {
-	fmt.Println(d.Sound)
-}
-
-// Speak is how the dog speaks loudly
-func (d Dog) SpeakThreeTimes() {
-	d.Sound = fmt.Sprintf("%v %v %v", d.Sound, d.Sound, d.Sound)
-	fmt.Println(d.Sound)
+func checkError(err error) {
+	if err != nil {
+		panic(err)
+	}
 }
