@@ -6,38 +6,30 @@ import (
 
 func main() {
 
-	fmt.Println("Create loops with for statements")
-	colors := []string{"Red", "Green", "Blue"}
-	fmt.Println(colors)
+	fmt.Println("Define and call functions")
 
-	for i := 0; i < len(colors); i++ {
-		fmt.Println(colors[i])
+	doSomething()
+
+	sum := addValues(5, 8)
+	fmt.Println("The sum is", sum)
+
+	multiSum, multiCount := addAllValues(4, 7, 9, 45)
+	fmt.Println("Sum of multiple values:", multiSum)
+	fmt.Println("Count of items:", multiCount)
+}
+
+func doSomething() {
+	fmt.Println("Doing something")
+}
+
+func addValues(value1, value2 int) int {
+	return value1 + value2
+}
+
+func addAllValues(values ...int) (int, int) {
+	total := 0
+	for _, v := range values {
+		total += v
 	}
-
-	for i := range colors {
-		fmt.Println(colors[i])
-	}
-
-	for _, color := range colors {
-		fmt.Println(color)
-	}
-
-	value := 1
-	for value < 10 {
-		fmt.Println("Value:", value)
-		value++
-	}
-
-	sum := 1
-	for sum < 1000 {
-		sum += sum
-		fmt.Println("Sum:", sum)
-		if sum > 200 {
-			goto theEnd
-		}
-	}
-
-theEnd:
-	fmt.Println("End of program")
-
+	return total, len(values)
 }
